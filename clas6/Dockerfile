@@ -16,8 +16,10 @@ ENV PATH $CERN/$CERN_LEVEL/src:$PATH
 ENV CERN_LIB $CERN_ROOT/lib
 ENV CERN_BIN $CERN_ROOT/bin
 ENV LD_LIBRARY_PATH $ROOTSYS/lib
-ENV CLAS_PARMS /clas/parms
 RUN ln -s $CERN_LIB $CERN
+
+ENV CLAS_PARMS /clas/parms
+COPY parms /clas/parms
 
 COPY clas-software /clas_software
 
@@ -26,5 +28,4 @@ RUN cd /clas_software && scons -j$(nproc) \
 
 ENV PATH /clas_software/build/bin:$PATH
 
-EXPOSE 22
 ENTRYPOINT cd $ROOTSYS && source bin/thisroot.sh && cd && /bin/bash
