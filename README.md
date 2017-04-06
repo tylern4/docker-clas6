@@ -34,15 +34,16 @@ sudo yum install docker-ce subversion
 
 ## Installing
 First download the CLAS6 software to clas6/clas-software.
-You can modify or add anything you would like to clas6/clas-software before you build the container.
 ```
 svn co https://jlabsvn.jlab.org/svnroot/clas/trunk/ clas6/clas-software
 ```
+You can modify or add anything you would like to clas6/clas-software before you build the container.
 After the software is checked out, you can build the container with:
 ```
 docker build -t clas6:test clas6/.
 ```
 It is also possible to modify the clas6/clas-software and then rebuild the container by just re-running the above command.
+
 To run the built container:
 ```
 docker run -v`pwd`:/root/data -it clas6:test
