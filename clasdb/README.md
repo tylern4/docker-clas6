@@ -20,14 +20,15 @@ mysqldump -u clasuser -h 127.0.0.1 -P 3333 --databases DATABASE_NAME > DATABASE_
 ```
 I have found that for CLAS6 software I have needed `calib` and `calib_user` which can be copied with the following commands:
 ```
-mysqldump -u clasuser -h 127.0.0.1 -P 3333 --databases calib_user > /tmp/calib_user.sql
-mysqldump -u clasuser -h 127.0.0.1 -P 3333 --databases calib > /tmp/calib.sql
+mysqldump -u clasuser -h 127.0.0.1 -P 3333 --databases calib_user | gzip -v > calib_user.sql.gz
+mysqldump -u clasuser -h 127.0.0.1 -P 3333 --databases calib | gzip -v > calib.sql.gz
 ```
 These will take a while since since you are downloading a few GB's worth of sql commands.
+I've also compressed them with gzip to save on space. 
 After you have the databases saved you can close the connection to jlab in the first terminal and continue with the following steps.
 
 ### Run mysql docker container
-Now we will run a mysql server in docker and call it `clasdb` and pull the image from the standard `mysql` image with the option `-d mysql`.
+Now we will run a mysql server in docker and call it `clasdb` and pull the image from the standard `mysql` image with the option `mysql`.
 Again I have chosen a random port between `1024-49151` for the docker container to use, in this case `4444`.
 
 ```
@@ -46,8 +47,8 @@ mysql -u root -h 127.0.0.1 -P 4444 < DATABASE_NAME.sql
 
 Again for the `calib` and `calib_user` databases this is:
 ```
-mysql -u root -h 127.0.0.1 -P 4444 < /tmp/calib_user.sql
-mysql -u root -h 127.0.0.1 -P 4444 < /tmp/calib.sql
+gunzip calib_user.sql.gz | mysql -u root -h 127.0.0.1 -P 4444
+gunzip calib.sql.gz | mysql -u root -h 127.0.0.1 -P 4444
 ```
 At this point is should be safe to remove the sql files to save space on your local machine.
 
