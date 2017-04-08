@@ -19,18 +19,20 @@ I have not attempted to run graphics from this docker container, although it sho
 
 On Debian/Ubuntu systems:
 ```
-sudo apt-get install docker-ce subversion
+sudo apt-get install docker-ce subversion mysql-client
 ```
 
 On RedHat/Centos systems:
 ```
-sudo yum install docker-ce subversion
+sudo yum install docker-ce subversion mysql-client
 ```
 
 ### For mysql container
 * Access to jlab
 * Docker
-* mysql
+* mysql-client
+
+See instructions in [clasdb](clasdb/README.md)
 
 ## Installing
 First download the CLAS6 software to `clas6/clas-software`.
