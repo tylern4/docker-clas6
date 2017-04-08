@@ -5,6 +5,8 @@
 FROM tylern4/rootv5:centos6
 LABEL maintainer "tylern@jlab.org"
 
+RUN yum install -y which mv
+
 ENV MYSQLINC /usr/include/mysql
 ENV MYSQLLIB /usr/lib64/mysql
 
@@ -23,14 +25,15 @@ ENV CERN_BIN $CERN_ROOT/bin
 ENV LD_LIBRARY_PATH $ROOTSYS/lib
 RUN ln -s $CERN_LIB $CERN
 
-ENV CLAS_PARMS /clas/parms
-COPY parms /clas/parms
 
 COPY clas-software /clas_software
 
 RUN cd /clas_software \
-    && scons -j$(nproc) \
+    && scons -j$(nproc) 2> clas6_build.err \
     && scons install
+
+ENV CLAS_PARMS /clas/parms
+COPY parms /clas/parms
 
 ENV PATH /clas_software/build/bin:$PATH
 
