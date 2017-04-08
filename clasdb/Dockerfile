@@ -1,4 +1,5 @@
 FROM mysql:latest
+LABEL maintainer "tylern@jlab.org"
 
 ADD calib.sql.gz /docker-entrypoint-initdb.d/
 ADD calib_user.sql.gz /docker-entrypoint-initdb.d/
