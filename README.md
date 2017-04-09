@@ -34,7 +34,24 @@ sudo yum install docker-ce subversion mysql-client
 
 See instructions in [clasdb](clasdb/README.md)
 
-## Installing
+## Download precompiled
+
+I have precompiled versions of both the clas6 image and clasdb image.
+The file is 6.1 GB so I haven't posted it online yet but contact me and I will find a way to get it to you.
+Once the image is downloaded just load it into docker `docker load -i clas6.tar` and start the mysql server:
+```
+docker run --name clasdb -p 3333:3306 -e MYSQL_USER=clas_offline -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d clasdb
+```
+
+This will take a while since it is loading the databases on the first run, but it only needs to be started once on the system you want to use.
+You should be able to see if it's still loading the databases by looking at the cpu usage of the container with `docker stats`. Once the cpu usage of the container has gone down the databases have been successfully loaded.
+
+Then run the container with the CLAS6 software with:
+```
+docker run --link clasdb:clasdb -v`pwd`:/root/data -it clas6
+```
+
+## Build your own:
 First download the CLAS6 software to `clas6/clas-software`.
 ```
 svn co https://jlabsvn.jlab.org/svnroot/clas/trunk/ clas6/clas-software
@@ -84,13 +101,14 @@ You can add these helpful functions to your `.bashrc`/`.zshrc` in order to manag
 # docker shortcuts
 docker-rm() { docker rm $(docker ps -aq); }
 docker-rmi() { docker rmi $(docker images -f "dangling=true" -q); }
+
+dclas-db() { docker run --name clasdb -p 3333:3306 -e MYSQL_USER=clas_offline -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d clasdb; }
+dclas-6() { docker run --link clasdb:clasdb -v`pwd`:/root/data -it clas6; }
 ```
 
 ### Run a single command
 
 You can also modify the ENTRYPOINT at the end of the container in order to just run a single command.
-
-
 
 ## To Do
 - [ ] Build cernlib in the container
