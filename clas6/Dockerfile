@@ -5,8 +5,6 @@
 FROM tylern4/rootv5:centos6
 LABEL maintainer "tylern@jlab.org"
 
-RUN yum install -y which mv
-
 ENV MYSQLINC /usr/include/mysql
 ENV MYSQLLIB /usr/lib64/mysql
 
@@ -25,7 +23,6 @@ ENV CERN_BIN $CERN_ROOT/bin
 ENV LD_LIBRARY_PATH $ROOTSYS/lib
 RUN ln -s $CERN_LIB $CERN
 
-
 COPY clas-software /clas_software
 
 RUN cd /clas_software \
@@ -36,5 +33,7 @@ ENV CLAS_PARMS /clas/parms
 COPY parms /clas/parms
 
 ENV PATH /clas_software/build/bin:$PATH
+COPY bashrc /root/.bashrc
 
-ENTRYPOINT cd $ROOTSYS && source bin/thisroot.sh && cd && /bin/bash
+WORKDIR /root/
+ENTRYPOINT ["/bin/bash"]

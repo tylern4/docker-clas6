@@ -1,0 +1,12 @@
+version: '2'
+services:
+  clas6:
+    build: clas6/.
+  clasdb:
+    build: clasdb/.
+    container_name: clasdb
+    ports:
+      - "3306"
+    environment:
+      - MYSQL_USER=clas_offline
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
