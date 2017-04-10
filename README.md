@@ -44,7 +44,7 @@ docker load -i clas6.tar
 ```
 and start the mysql server with:
 ```
-docker run --name clasdb -p 3306:3306 -e MYSQL_USER=clas_offline -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d clas6db
+docker run --name clasdb -p 3306:3306 -e MYSQL_USER=root -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d clas6db
 ```
 
 This will take a while since it is loading the databases on the first run, but it only needs to be started once on the system you want to use.
