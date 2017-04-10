@@ -39,7 +39,9 @@ See instructions in [clasdb](clasdb/README.md)
 I have precompiled versions of both the clas6 image and clasdb image.
 The file is 6.1 GB so I haven't posted it online yet but contact me and I will find a way to get it to you.
 Once the image is downloaded just load it into docker
-```docker load -i clas6.tar```
+```
+docker load -i clas6.tar
+```
 and start the mysql server with:
 ```
 docker run --name clasdb -p 3306:3306 -e MYSQL_USER=clas_offline -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d clas6db
