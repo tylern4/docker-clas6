@@ -1,7 +1,9 @@
 clas6/clas-software
+singularity/clas-software
 
 *.sql
 *.gz
+*.tgz
 
 *.fpk
 *.dat

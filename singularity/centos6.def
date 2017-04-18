@@ -1,0 +1,19 @@
+# Bootstrap definition example for Centos-6 with CERN ROOT
+Bootstrap: docker
+From: tylern4/rootv5:centos6
+IncludeCmd: yes
+
+%setup
+    echo "Looking in directory '$SINGULARITY_ROOTFS' for /bin/sh"
+    if [ ! -x "$SINGULARITY_ROOTFS/bin/sh" ]; then
+        echo "Hrmm, this container does not have /bin/sh installed..."
+        exit 1
+    fi
+    exit 0
+
+%post
+	exit 0
+
+%runscript
+	echo "Arguments received: $*"
+	exec /usr/bin/bash "$@"
