@@ -1,5 +1,6 @@
 tar -xvf /mnt/calib.sql.tgz
 tar -xvf /mnt/calib_user.sql.tgz
+mysql -u root -h 127.0.0.1 < user_setup.sql
 echo "Untared"
 mysql -u root -h 127.0.0.1 < calib.sql
 echo "calib done"
