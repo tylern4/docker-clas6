@@ -7,3 +7,7 @@ cp /mnt/env.sh /clas-software/
 cd /clas-software
 scons -j$(nproc) 2> build.err
 scons install
+
+export CLASTOOL=/clas-software/analysis/ClasTool
+export OS_NAME=Linux
+cd /clas-software/analysis/ClasTool && make
