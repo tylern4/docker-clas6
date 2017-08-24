@@ -11,3 +11,4 @@ scons install
 export CLASTOOL=/clas-software/analysis/ClasTool
 export OS_NAME=Linux
 cd /clas-software/analysis/ClasTool && make
+cd Utils && make

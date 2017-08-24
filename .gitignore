@@ -10,3 +10,7 @@ singularity/clas-software
 *.ddl
 *.bfp
 *.tbl
+
+*.bos
+*.config
+clas6/parms
