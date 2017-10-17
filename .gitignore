@@ -1,6 +1,11 @@
 clas6/clas-software
 singularity/clas-software
 
+*.aux
+*.dvi
+*.pdf
+*.log
+
 *.sql
 *.gz
 *.tgz
