@@ -1,0 +1,34 @@
+<Request>
+  <Email email="email@jlab.org"/>
+  <Project name="project_name"/>
+  <Track name="analysis"/>
+  <Memory space="1" unit="GB"/>
+  <TimeLimit unit="hours" time="48"/>
+  <DiskSpace space="4" unit="GB" />
+
+  <!-- Make sure to use centos 7 to run singualrity -->
+  <OS name="centos7" />
+
+  <!-- Make sure to run middle layer to run singularty container -->
+  <Command><![CDATA[
+    /home/user/path/to/run_sing.sh
+  ]]></Command>
+
+
+  <List name="events">
+event1
+event2
+  </List>
+
+  <ForEach list="events">
+    <Job>
+
+      <Name name="project_name_${events}"/>
+      <Input src="mss:/mss/path/to/file/{events}" dest="file"/>
+
+      <Output src="file.out" dest="file:/path/to/output/{events}.out" />
+      <Output src="tape_file.out" dest="mss:/path/to/tape/tape_{events}.out" />
+    </Job>
+  </ForEach>
+
+</Request>

@@ -1,0 +1,62 @@
+\documentclass[12pt]{report}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{listings}
+
+\usepackage[sfdefault]{GoSans}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{color}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+ \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  backgroundcolor=\color{backcolor},
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+\title{Singularity on the Farm}
+\author{Nick Tyler \\ tylern@jlab.org}
+
+
+\begin{document}
+\maketitle
+\section*{Building the Container}
+\pagebreak
+
+
+\section*{Running on the Farm}
+Once you have the container you want to run built you need to transfer it to the farm and start working.
+
+\subsection*{jsub script}
+\quad Following is an example jsub script written in the xml format. You should be able to use your regular Centos 6 submission scripts with only a few modifications. I will point out these modifications in the xml format but they should work in the text format as well.
+\lstinputlisting[language=Xml]{sing_convert.xml}
+
+There is one major difference to running singularity than running jobs on a Centos 6 machine. In the command section instead running your job script you must run a singularity middle layer script. This script runs singularity, which in turn runs your job script. It is discussed more in the following section.
+
+
+\subsection*{Singularity middle layer script}
+\quad The purpose of the middle layer script is to bind the proper disks to the singularity container and to them run the image with your desired job script. The only things you should modify are the location to the singularity image you want to run, and the job script file you want to run.
+
+\lstinputlisting[language=Bash]{run_sing.sh}
+
+\subsection*{Job script}
+
+
+\end{document}
