@@ -37,14 +37,11 @@
 
 \begin{document}
 \maketitle
-\section*{Building the Container}
-\pagebreak
-
 
 \section*{Running on the Farm}
-Once you have the container you want to run built you need to transfer it to the farm and start working.
+Running singularity on the farm takes 
 
-\subsection*{jsub script}
+\subsection*{jsub Script}
 \quad Following is an example jsub script written in the xml format. You should be able to use your regular Centos 6 submission scripts with only a few modifications. I will point out these modifications in the xml format but they should work in the text format as well.
 \lstinputlisting[language=Xml]{sing_convert.xml}
 
@@ -57,6 +54,13 @@ There is one major difference to running singularity than running jobs on a Cent
 \lstinputlisting[language=Bash]{run_sing.sh}
 
 \subsection*{Job script}
+\pagebreak
+
+%\section*{Building your own Container}
+%\quad Building the container is simple. The only software needed is singularity. %Singularity can be installed from...
+
+%Once installed download
+%\pagebreak
 
 
 \end{document}
