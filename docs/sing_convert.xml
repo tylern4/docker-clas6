@@ -1,7 +1,8 @@
 <Request>
   <Email email="email@jlab.org"/>
   <Project name="project_name"/>
-  <Track name="analysis"/>
+  <Track name="simulation"/>
+  <!--<Track name="analysis"/>-->
   <Memory space="1" unit="GB"/>
   <TimeLimit unit="hours" time="48"/>
   <DiskSpace space="4" unit="GB" />
@@ -11,7 +12,7 @@
 
   <!-- Make sure to run middle layer to run singularty container -->
   <Command><![CDATA[
-    /home/user/path/to/run_sing.sh
+    /path/to/run_sing.sh
   ]]></Command>
 
 

@@ -1,0 +1,77 @@
+\documentclass[12pt]{report}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{listings}
+
+%\usepackage[sfdefault]{GoSans}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{color}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+ \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  backgroundcolor=\color{backcolor},
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+\title{Singularity on the Farm}
+\author{Nick Tyler \\ tylern@jlab.org}
+
+
+\begin{document}
+\maketitle
+
+\section*{Running on the Farm}
+Singularity is a container system built to run on server farms and 
+supercomputers. A container is similar to a virtual machine but usues the 
+underlying kernel of the computer system in order to save on space and overhead 
+when using computing recources.  You can test the container interactivly by 
+using the ``singularity shell'' command:
+\lstinputlisting[language=Bash]{run_local.sh}
+
+This will give you drop you into a shell with all the clas software availible in /usr/local
+with the binaries, include files and libraries in their respective folders. They  
+are also in the path so everything should run without changes to environment 
+variables.
+
+\subsection*{jsub Script}
+\quad Following is an example jsub script written in the xml format.  You should 
+be able to use your regular Centos 6 submission scripts with only a few modifications. I will 
+point out these modifications in the xml format but they should work in the text format as well.
+\lstinputlisting[language=Xml]{sing_convert.xml}
+
+There is one major difference to running singularity than running jobs on a Centos 6 machine. 
+In the command section instead of running your job script you should run a singularity middle layer script. 
+This script runs singularity, which in turn runs your job script. It is discussed more in the following section.
+
+
+\subsection*{Singularity middle layer script}
+\quad The purpose of the middle layer script is to bind the proper disks to the 
+singularity container and to then run the image with your desired job script. 
+The only things you should modify are the location to the singularity image you want to run, 
+and the job script file you want to run.
+
+\lstinputlisting[language=Bash]{run_sing.sh}
+
+\subsection*{Job script}
+\lstinputlisting[language=Bash]{job_script.sh}
+\pagebreak
+
+\end{document}
